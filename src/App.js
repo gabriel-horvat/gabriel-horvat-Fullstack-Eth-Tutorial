@@ -12,6 +12,20 @@ function App() {
 
   async function fetchGreeting() {
     // if using metamask window.eth is present
+    if (typeof window.ethereum !== "undefined") {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const contract = new ethers.Contract(
+        greeterAddress,
+        Greeter.abi,
+        provider
+      );
+      try {
+        const data = await contract.greet();
+        console.log("data: ", data);
+      } catch (err) {
+        console.log("Error: ", err);
+      }
+    }
   }
 
   async function setGreeting() {}
