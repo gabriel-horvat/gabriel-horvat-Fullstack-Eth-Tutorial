@@ -11,7 +11,7 @@ function App() {
   async function requestAccount() {}
 
   async function fetchGreeting() {
-    // if using metamask window.eth is present
+    // if user is using metamask window.eth is present
     if (typeof window.ethereum !== "undefined") {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const contract = new ethers.Contract(
@@ -28,23 +28,23 @@ function App() {
     }
   }
 
-  async function setGreeting() {}
+  async function setGreeting() {
+    if (!greeting) return;
+    if (typeof window.ethereum !== "undefined") {
+      await requestAccount();
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(greeterAddress, Greeter.abi, signer);
+      const transaction = await contract.setGreeting(greeting);
+      setGreetingValue("");
+      await transaction.wait();
+      fetchGreeting();
+    }
+  }
 
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header className="App-header"></header>
     </div>
   );
 }
