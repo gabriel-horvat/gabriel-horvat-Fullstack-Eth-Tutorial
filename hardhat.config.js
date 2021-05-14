@@ -25,7 +25,7 @@ module.exports = {
     },
     ropsten: {
       url: "https://ropsten.infura.io/v3/a65e32d88c9c49dca4f6ef94d2bbf203",
-      accounts: [`0x${process.env.ACCOUNT_KEY}`],
+      accounts: [`0x${process.env.REACT_APP_ACCOUNT_KEY}`],
     },
   },
 };
