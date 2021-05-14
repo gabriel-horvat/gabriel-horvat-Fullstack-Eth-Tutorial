@@ -6,9 +6,11 @@ import "./App.css";
 const greeterAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
 function App() {
-  const [greeting, setGreetingValue] = useState();
+  const [greeting, setGreetingValue] = useState("");
 
-  async function requestAccount() {}
+  async function requestAccount() {
+    await window.ethereum.request({ method: "eth_requestAccounts" });
+  }
 
   async function fetchGreeting() {
     // if user is using metamask window.eth is present
