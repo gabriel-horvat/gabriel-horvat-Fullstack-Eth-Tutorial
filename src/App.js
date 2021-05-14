@@ -44,7 +44,15 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header"></header>
+      <header className="App-header">
+        <button onClick={fetchGreeting}> Fetch Greeting</button>
+        <button onClick={setGreeting}> Set Greeting</button>
+        <input
+          onChange={(e) => setGreetingValue(e.target.value)}
+          placeholder="set greeting"
+          value={greeting}
+        ></input>
+      </header>
     </div>
   );
 }
