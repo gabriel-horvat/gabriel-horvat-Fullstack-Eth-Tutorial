@@ -1,7 +1,8 @@
 require("@nomiclabs/hardhat-waffle");
 
-// This is a sample Hardhat task. To learn how to create your own go to
-// https://hardhat.org/guides/create-task.html
+const infuraUrl = process.env.REACT_APP_INFURA_URL;
+const PRIVATE_KEY_1 = process.env.REACT_APP_ACCOUNT_KEY;
+
 task("accounts", "Prints the list of accounts", async () => {
   const accounts = await ethers.getSigners();
 
@@ -16,16 +17,20 @@ task("accounts", "Prints the list of accounts", async () => {
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
+
 module.exports = {
-  solidity: "0.8.3",
-  paths: { artifacts: "./src/artifacts" },
+  defaultNetwork: "hardhat",
+  paths: {
+    artifacts: "./src/artifacts",
+  },
   networks: {
     hardhat: {
       chainId: 1337,
     },
     ropsten: {
-      url: "https://ropsten.infura.io/v3/a65e32d88c9c49dca4f6ef94d2bbf203",
-      accounts: [`0x${process.env.REACT_APP_ACCOUNT_KEY}`],
+      url: infuraUrl,
+      accounts: [PRIVATE_KEY_1],
     },
   },
+  solidity: "0.8.3",
 };

@@ -3,7 +3,13 @@ import { ethers } from "ethers";
 import Greeter from "./artifacts/contracts/Greeter.sol/Greeter.json";
 import "./App.css";
 
-const greeterAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+if (process.env.NODE_ENV === "production") {
+  console.log("We are running in production mode");
+} else {
+  console.log("We are running in dev mode");
+}
+
+const greeterAddress = process.env.REACT_APP_GREETER_ADDRESS;
 
 function App() {
   const [greeting, setGreetingValue] = useState("");
